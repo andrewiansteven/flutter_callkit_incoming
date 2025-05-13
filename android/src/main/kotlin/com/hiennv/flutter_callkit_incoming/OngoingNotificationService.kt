@@ -169,17 +169,7 @@ class OngoingNotificationService : Service() {
         }
         notificationBuilder.setOngoing(true)
         val notification = notificationBuilder.build()
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(
-                onGoingNotificationId,
-                notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_PHONE_CALL
-            )
-        } else {
-            startForeground(onGoingNotificationId, notification)
-        }
-
+        startForeground(onGoingNotificationId, notification)
     }
 
     private fun getHangupPendingIntent(notificationId: Int, data: Bundle): PendingIntent {
