@@ -182,8 +182,7 @@ class OngoingNotificationService : Service() {
             startForeground(
                 onGoingNotificationId,
                 notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_PHONE_CALL
-                        serviceType
+                serviceType
             )
         } else {
             startForeground(onGoingNotificationId, notification)
