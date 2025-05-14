@@ -28,6 +28,8 @@ import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import okhttp3.OkHttpClient
+import android.util.Log
+
 
 class OngoingNotificationService : Service() {
 
