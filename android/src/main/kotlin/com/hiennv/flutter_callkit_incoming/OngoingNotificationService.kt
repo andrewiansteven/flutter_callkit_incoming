@@ -37,6 +37,7 @@ class OngoingNotificationService : Service() {
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d("CallKitService", "onStartCommand triggered. Intent: $intent")
         showOngoingCallNotification(intent?.extras!!)
         return START_STICKY
     }
@@ -179,13 +180,32 @@ class OngoingNotificationService : Service() {
             else {
                 serviceType = serviceType or ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE
             }
-            startForeground(
-                onGoingNotificationId,
-                notification,
-                serviceType
-            )
+
+            try {
+                startForeground(
+                    onGoingNotificationId,
+                    notification,
+                    serviceType,
+                    )
+                Log.d("CallKitService", "startForeground successful")
+            } catch (e: SecurityException) {
+                Log.e("CallKitService", "startForeground failed: ${e.message}", e)
+            }
+
+
+//            startForeground(
+//                onGoingNotificationId,
+//                notification,
+//                serviceType
+//            )
         } else {
-            startForeground(onGoingNotificationId, notification)
+            try {
+                startForeground(onGoingNotificationId, notification)
+                Log.d("CallKitService", "startForeground successful")
+            } catch (e: SecurityException) {
+                Log.e("CallKitService", "startForeground failed: ${e.message}", e)
+            }
+//            startForeground(onGoingNotificationId, notification)
         }
     }
 
